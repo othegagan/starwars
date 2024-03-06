@@ -11,7 +11,7 @@ export class PlanetService {
   constructor(private http: HttpClient) {}
 
   async getPlanets(page: number, searchQuery: string): Promise<any> {
-    const url = `${environment.API_URL}/?page=${page}&search=${searchQuery}`;
+    const url = `${environment.API_URL}/?page=${page}&search=${searchQuery || ""}`;
 
     try {
       const response = await axios.get(url);

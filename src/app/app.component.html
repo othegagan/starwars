@@ -1,9 +1,23 @@
 <div class="flex flex-col min-h-screen   dark:bg-background">
 
   <div class="container  flex-grow flex flex-col gap-4 ">
-    <app-header></app-header>
 
-    <app-planets-list></app-planets-list>
+    <header class=" w-full ">
+      <div class="flex h-16 items-center justify-between">
+        <div class="mr-4 flex overflow-hidden ">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/2560px-Star_Wars_Logo.svg.png"
+            alt="" class="object-fill w-20">
+        </div>
+
+        <div class="md:w-[400px]">
+          <app-planets-search (onPlanetSearch)="planetSearchHandler($event)"></app-planets-search>
+        </div>
+      </div>
+    </header>
+
+
+    <app-planets-list [planetName]="planetName"></app-planets-list>
   </div>
 
   <div class="mt-auto">

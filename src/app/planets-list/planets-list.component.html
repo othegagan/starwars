@@ -1,27 +1,18 @@
-<div *ngIf="isFecthing">
+<div *ngIf="isFetching">
     <app-loader></app-loader>
 </div>
 
 
-<!-- <div class="relative"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-        class="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground">
-        <circle cx="11" cy="11" r="8"></circle>
-        <path d="m21 21-4.3-4.3"></path>
-    </svg><input
-        class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 pl-8"
-        type="text" [(ngModel)]="searchQuery" (input)="onSearch()" placeholder="Search planets">
-</div> -->
 
-
-<div class="flex gap-4 justify-end">
+<div class="flex gap-4 justify-end" *ngIf=" !isFetching">
     <button [disabled]="!previousUrl" (click)="onPrevious()"
         class="bg-white font-medium text-sm md:text-md px-3 py-1 rounded-md text-black disabled:bg-white/50  hover:bg-yellow-400 transition-colors">Previous</button>
     <button [disabled]="!nextUrl" (click)="onNext()"
         class="bg-white font-medium text-sm md:text-md px-3 py-1 rounded-md text-black disabled:bg-white/50  hover:bg-yellow-400 transition-colors">Next</button>
 </div>
 
-<div *ngIf="planets.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 grid-flow-row-dense mt-6">
+<div *ngIf="planets.length > 0 && !isFetching"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 grid-flow-row-dense mt-6">
 
 
     <div *ngFor="let planet of planets"
@@ -135,8 +126,7 @@
                     *ngIf="residentDetails[residentUrl]">
                     <div class="h-20 rounded-md w-20     overflow-hidden    ">
                         <img [src]="'https://starwars-visualguide.com/assets/img/characters/' + getResidentId(residentUrl) + '.jpg'"
-                            class="object-contain w-full h-auto" [alt]="residentDetails[residentUrl].name"
-                            (error)="handleImageError($event)">
+                            [alt]="residentDetails[residentUrl].name" (error)="handleImageError($event)">
                     </div>
 
                     <p class="text-sm truncate">{{ residentDetails[residentUrl].name }} </p>
@@ -157,4 +147,8 @@
         </div>
 
     </div>
+</div>
+
+<div *ngIf="planets.length === 0 && !isFetching" class="text-center">
+    <p class="text-md text-neutral-500"> 💥 No planets found.</p>
 </div>
