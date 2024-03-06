@@ -43,7 +43,7 @@
 
 
 .rocket-loader::before {
-    animation: blink 1s infinite;
+    animation: blink 2s infinite;
     bottom: 6%;
     content: "Exploring the cosmos, please stand by as we search for planets...";
     font-size: 8px;
